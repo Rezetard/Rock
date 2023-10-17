@@ -6,45 +6,54 @@ function computerChoice() {
         case 3: return ('Scissors');
     }
 }
+var H = 0;
+var C = 0;
+const YouPicked = document.querySelector('.YouPicked')
+const ComputerPicked = document.querySelector('.ComputerPicked')
 
-
-
-function playerChoice() {
-    return prompt('Rock, Paper or Scissors?');
-}
-
-function playGame() {
+function playGame(pc) {
    const cc = computerChoice();
-   const pc = playerChoice();
+
+   YouPicked.textContent = 'You Picked: ' + pc
+   ComputerPicked.textContent = 'Computer Picked: ' + cc
 
    if (cc === pc) return 'its a tie'
 
-   else if (cc === 'Scissors' && pc === 'Paper') return 'Computer'
+    else if (cc === 'Scissors' && pc === 'Paper') {
+    return 'Computer'}
 
-   else if (cc === 'Rock' && pc === 'Scissors') return 'Computer'
+    else if (cc === 'Rock' && pc === 'Scissors') {
+    return 'Computer'}
 
-   else if (cc === 'Paper' && pc === 'Rock') return 'Computer'
+    else if (cc === 'Paper' && pc === 'Rock') {
+    return 'Computer'}
 
-   else return 'Human'
+    else {
+    return 'Human'} 
+
 }
 
-function fiveGame() {
+const btn1 = document.querySelectorAll('button');
+const HumanScore = document.querySelector('.HumanScore')
+const ComputerScore = document.querySelector('.ComputerScore')
+const FinalScore = document.querySelector('span')
 
-    var y = 0;
-    var z = 0;
 
-    for (let i = 0; i<5; i++) {
-        var x = playGame();
-        if (x === 'Human') y++;
-         
-        else if (x === 'Computer') z++;
-        
-        else continue;
+btn1.forEach (btn1 => (btn1.addEventListener('click', e => {
+    var x = (playGame(btn1.textContent))
+    
+    if (x === 'Computer'){
+        C++;
+        ComputerScore.textContent = C;
+        if (C === 5) {FinalScore.textContent = 'Computer Wins', C = 0, H = 0, ComputerScore.textContent = C; HumanScore.textContent = H } 
+        ;}
 
-    }
-    if (y>z) return 'Human Wins'
-    else if (z>y) return 'Computer wins'
-    else return 'its a tie'
-}
+    else if (x === 'Human') {
+        H++;
+        HumanScore.textContent = H;
+        if (H === 5) {FinalScore.textContent ='Human Wins', H = 0, C = 0,  HumanScore.textContent = H; ComputerScore.textContent = C}
+        ;}
 
-console.log(fiveGame());
+})));
+ 
+
